@@ -440,7 +440,7 @@ function binaryAgent(str) {
 // Remember, you can access object properties through either dot notation or [] notation.
 
 function truthCheck(collection, pre) {
-    return pre;
+    return collection.every(elem => elem.hasOwnProperty(pre) && Boolean(elem[pre]));
   }
   
   truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy", "sex": "male"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex");
@@ -461,10 +461,25 @@ function truthCheck(collection, pre) {
 // If either argument isn't a valid number, return undefined.
 
 function addTogether() {
-    return false;
+   var params = [].slice.call(arguments);
+  if(params.every(function(param){
+    return typeOfParam === 'number';
+  })){
+    return undefined;
   }
-  
-  addTogether(2,3);
+  if(params.length === 2){
+    return params[0] + params[1];
+  }
+  else{
+    var firstParam = params[0];
+    var adOneMore = function(secondParam){
+      return addTogether(firstParam, secondParam);
+    }
+  };
+  return addOneMore;
+
+  }
+  addTogether("http://bit.ly/IqT6zt");
 
 
 
@@ -481,16 +496,32 @@ function addTogether() {
 //   setFullName(firstAndLast)
 //   Run the tests to see the expected output for each method. The methods that take an argument must accept only one argument and it has to be a string. These methods must be the only available means of interacting with the object.
 var Person = function(firstAndLast) {
-    // Only change code below this line
-    // Complete the method below and implement the others similarly
+   var array = firstAndLast.split(" ");
     this.getFullName = function() {
-      return "";
+     returnarray[0];
     };
-    return firstAndLast;
+    this.getLastName = function(){
+      return array[1];
+    };
+    this.getFullName = function(){
+      return array[0] + " " + array[1];
+    };
+    this.setFirstName = function(first){
+      array[0] = first;
+    };
+    this.setLastName = function(last){
+      array[1] = last;
+    };
+    this.setFullName = function(firstAndLast){
+      var arraySplit = firstAndLast.split(" ");
+      this.setFirstName(arraySplit[0]);
+      this.setLastName(arraySplit[1]);
+    };
   };
   
   var bob = new Person('Bob Ross');
-  bob.getFullName();
+  //bob.setFullName('Dylan CT360');
+ // bob.getFullName();
 
 
 //   21 Intermediate Algorithm Scripting: Map the Debris
@@ -504,11 +535,26 @@ var Person = function(firstAndLast) {
 
 // The radius of the earth is 6367.4447 kilometers, and the GM value of earth is 398600.4418 km3s-2
 
-function orbitalPeriod(arr) {
-    var GM = 398600.4418;
-    var earthRadius = 6367.4447;
-    return arr;
-  }
+
+      const orbitalPeriods = arr.map(elem => {
+      let avgAlt = elem.avgAlt 
+      delete elem.avgAlt 
+      const numerator = (earthRadius + avgAlt)**3 
+      const innerRoot = Math.sqrt(numerator / GM) 
+      const orbitalPeriod = Math.ceil(innerRoot * root);
+      
+      
+      return {
+        ...elem,
+        orbitalPeriod
+      }
+  
+    })
+  
+    return orbitalPeriods
+  
+  
+  
   
   orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
 
@@ -522,11 +568,19 @@ function orbitalPeriod(arr) {
 // We'll pass strings with varying formats, such as "racecar", "RaceCar", and "race CAR" among others.
 
 // We'll also pass strings with special symbols, such as "2A3*3a2", "2A3 3a2", and "2_A3*3#A2".
+  function palindrome(str) {
+    const alphanumericOnly = str
+        // 1) Lowercase the input
+        .toLowerCase()
+        // 2) Strip out non-alphanumeric characters
+        .match(/[a-z0-9]/g);
+        
+    // 3) return string === reversedString
+    return alphanumericOnly.join('') ===
+        alphanumericOnly.reverse().join('');
+}
 
-function palindrome(str) {
-    return true;
-  }
-  
-  
-  
-  palindrome("eye");
+
+
+palindrome("eye");
+//////////////////////////////////WOW!!!!!!!!!!!!/////////////////////////////////////////////
